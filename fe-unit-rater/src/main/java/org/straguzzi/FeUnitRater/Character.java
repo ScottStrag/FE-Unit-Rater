@@ -1,6 +1,7 @@
 package org.straguzzi.FeUnitRater;
 
 import java.util.*; // Mostly for List
+import java.math.*;
 
 /**
  * Basic class for any character.
@@ -19,9 +20,11 @@ public class Character {
 	
 	private List<Integer> curStats; // The character's personal stats, semi-user controlled
 	private List<Float> avgStats; // The character's projected stats. Controlled by running the "level up" function
-	private List<Integer> charGrowths; // The character's personal growth rates, before class modifiers
+	private List<Float> charGrowths; // The character's personal growth rates, before class modifiers
 	
 	private CharClass currentClass; // Modifiers from the class are added to the above during calculations
+	
+	private List<Float> curGrowths; // charGrowths + classGrowths
 	
 	// TODO, some sort of way of tracking previous levels?
 	
@@ -33,17 +36,209 @@ public class Character {
 		
 		curStats = new ArrayList<Integer>();
 		avgStats = new ArrayList<Float>();
-		charGrowths = new ArrayList<Integer>();
+		charGrowths = new ArrayList<Float>();
+		curGrowths = new ArrayList<Float>();
+		
 	}
+ 	
+ 	/**
+ 	 * The LONG constructor to generate a character, need to give ALL info about the character to generate them.
+ 	 * 
+ 	 * All constructor info should be pretty self explanatory.
+ 	 * 
+ 	 * Give character growths as floats instead of integers (e.g. 55% growth would go in as .55);
+ 	 * 
+ 	 * @param name
+ 	 * @param charClass
+ 	 * @param baseLevel
+ 	 * @param hp
+ 	 * @param strength
+ 	 * @param magic
+ 	 * @param skill
+ 	 * @param speed
+ 	 * @param luck
+ 	 * @param def
+ 	 * @param res
+ 	 * @param hpGrowth
+ 	 * @param strGrowth
+ 	 * @param magGrowth
+ 	 * @param spdGrowth
+ 	 * @param lukGrowth
+ 	 * @param defGrowth
+ 	 * @param resGrowth
+ 	 */
+ 	public Character(String name, CharClass charClass, int baseLevel,
+ 			int hp, int strength, int magic, int skill, int speed, int luck, int def, int res, int charm,
+ 			float hpGrowth, float strGrowth, float magGrowth, float sklGrowth, float spdGrowth,
+ 			float lukGrowth, float defGrowth, float resGrowth, float chaGrowth) {
+ 		this.name = name;
+ 		this.currentClass = charClass;
+ 		this.level = baseLevel;
+ 		
+ 		curStats = new ArrayList<Integer>(9);
+ 		curStats.add(0, hp);
+ 		curStats.add(1, strength);
+ 		curStats.add(2, magic);
+ 		curStats.add(3, skill);
+ 		curStats.add(4, speed);
+ 		curStats.add(5, luck);
+ 		curStats.add(6, def);
+ 		curStats.add(7, res);
+ 		curStats.add(8, charm);
+ 		
+ 		charGrowths = new ArrayList<Float>(9);
+ 		charGrowths.add(0, hpGrowth);
+ 		charGrowths.add(1, strGrowth);
+ 		charGrowths.add(2, magGrowth);
+ 		charGrowths.add(3, sklGrowth);
+ 		charGrowths.add(4, spdGrowth);
+ 		charGrowths.add(5, lukGrowth);
+ 		charGrowths.add(6, defGrowth);
+ 		charGrowths.add(7, resGrowth);
+ 		charGrowths.add(8, chaGrowth);
+ 		
+ 		avgStats = new ArrayList<Float>(9);
+ 		for(int i = 0; i < curStats.size(); i++) {
+ 			avgStats.add(i, (float) curStats.get(i));
+ 		}
+ 		
+ 		curGrowths = addFloatLists(charGrowths, currentClass.getClassGrowths());
+ 		
+ 		
+ 	}
  	
  	/**
  	 * Projects a character's stats at a given level. The calculation works similarly to PoR's fixed growth mode.
  	 * Stats are rounded to the nearest whole number.
  	 * @param level to take the character to. Will not work if you try to level down
- 	 * @return a List of the character's stats at a given level.
+ 	 * @return a List of the character's projected stats at a given level.
  	 */
  	public List<Integer> project(int level) {
- 		return null;
+ 		List<Integer> leveledStats = new ArrayList<Integer>();
+ 		
+ 		// Will not project backwards
+ 		if(this.level < level) {
+ 			return null;
+ 		}
+ 		else if(this.level == level) {
+ 			return curStats; // Projecting to the same level are the same stats...
+ 		}
+ 		
+ 		else { // Main algorithm. Adds the growth rate to each stat for each level, then rounds the resulting floats to an int
+ 			int roundedStat;
+ 			int levels = level - this.level;
+ 			
+ 			for(int i = this.level; i < level; i++) {
+ 				roundedStat = Math.round(curStats.get(i) + (curGrowths.get(i) * levels));
+ 				leveledStats.add(i, roundedStat);
+ 			}
+ 		}
+ 		
+ 		return leveledStats;
+ 	}
+ 	
+ 	public void changeClass(CharClass newClass) {
+ 		// Removes old class
+ 		
+ 		// Adds new class
+ 	}
+ 	
+ 	/**
+ 	 * Adds 2 lists together, lists must be the same size.
+ 	 * @param list1
+ 	 * @param list2
+ 	 * @return the sum of 2 lists, or null if they're different sizes
+ 	 */
+ 	public static List<Integer> addIntLists(List<Integer> list1, List<Integer> list2) {
+ 		if(list1.size() != list2.size()) {
+ 			return null; // ERROR case
+ 		}
+ 		
+ 		List<Integer> sum = new ArrayList<Integer>();
+ 		
+ 		for(int i = 0; i < list1.size(); i++) {
+ 			sum.add(list1.get(i) + list2.get(i));
+ 		}
+ 		
+ 		return sum;
+ 	}
+ 	
+ 	/**
+ 	 * Subtracts 2 lists
+ 	 * 
+ 	 * Remember, order matters here
+ 	 * 
+ 	 * @param list1
+ 	 * @param list2
+ 	 * @return difference of 2 lists, or null if they're different sizes
+ 	 */
+ 	public static List<Integer> subIntLists(List<Integer> list1, List<Integer> list2) {
+ 		for(int i = 0; i < list1.size(); i++) {
+ 			list2.set(i, list2.get(i) * -1);
+ 		}
+ 		
+ 		return addIntLists(list1, list2);
+ 	}
+ 	
+ 	/**
+ 	 * Adds 2 lists of floats
+ 	 * 
+ 	 * @param list1
+ 	 * @param list2
+ 	 * @return sum of 2 lists, or null if they're different sizes
+ 	 */
+ 	public static List<Float> addFloatLists(List<Float> list1, List<Float> list2) {
+ 		if(list1.size() != list2.size()) {
+ 			return null; // ERROR case
+ 		}
+ 		
+ 		List<Float> sum = new ArrayList<Float>();
+ 		
+ 		for(int i = 0; i < list1.size(); i++) {
+ 			sum.add(list1.get(i) + list2.get(i));
+ 		}
+ 		
+ 		return sum;
+ 	}
+ 	
+ 	/**
+ 	 * Subtracts 2 lists
+ 	 * 
+ 	 * Remember, order matters here
+ 	 * 
+ 	 * @param list1
+ 	 * @param list2
+ 	 * @return the difference of 2 lists
+ 	 */
+ 	public static List<Float> subFloatLists(List<Float> list1, List<Float> list2) {
+ 		for(int i = 0; i < list1.size(); i++) {
+ 			list2.set(i, list2.get(i) * -1);
+ 		}
+ 		
+ 		return addFloatLists(list1, list2);
+ 	}
+ 	
+ 	/**
+ 	 * Returns character's info and stats in an easily readable format
+ 	 */
+ 	public String toString() {
+ 		String output = "";
+ 		
+ 		// Add headers
+ 		output = name + " Level " + level + " " + currentClass.getName() + "\n";
+ 		output = output + "HP\tStr\tMag\tDex\tSpd\tLuk\tDef\tRes\tCha\n";
+ 		
+ 		for(int i = 0; i < curStats.size(); i++) {
+ 			output = output + curStats.get(i) + "\t";
+ 		}
+ 		output = output + "\n";
+ 		
+ 		for(int i = 0; i < curGrowths.size(); i++) {
+ 			output = output + curGrowths.get(i) + "\t";
+ 		}
+ 		output = output + "\n";
+ 		
+ 		return output;
  	}
 
 }
