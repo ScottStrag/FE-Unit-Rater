@@ -36,6 +36,14 @@ public class Character {
 		charGrowths = new ArrayList<Integer>();
 	}
  	
- 	
+ 	/**
+ 	 * Projects a character's stats at a given level. The calculation works similarly to PoR's fixed growth mode.
+ 	 * Stats are rounded to the nearest whole number.
+ 	 * @param level to take the character to. Will not work if you try to level down
+ 	 * @return a List of the character's stats at a given level.
+ 	 */
+ 	public List<Integer> project(int level) {
+ 		return null;
+ 	}
 
 }
