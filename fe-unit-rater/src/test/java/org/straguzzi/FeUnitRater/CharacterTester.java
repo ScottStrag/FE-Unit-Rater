@@ -74,6 +74,8 @@ public class CharacterTester {
 		
 		System.out.println(test); // Should print out info about Byleth at level 1 (See link above for source on info)
 		
+		System.out.println("On average, after 5 levels in the Commoner class, Byleth's stats look like this:\n" + test.project(5));
+		
 	}
 
 	public static void main(String[] args) {

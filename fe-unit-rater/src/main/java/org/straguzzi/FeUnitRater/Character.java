@@ -117,18 +117,17 @@ public class Character {
  		List<Integer> leveledStats = new ArrayList<Integer>();
  		
  		// Will not project backwards
- 		if(this.level < level) {
+ 		if(this.level > level) {
  			return null;
  		}
  		else if(this.level == level) {
  			return curStats; // Projecting to the same level are the same stats...
  		}
- 		
  		else { // Main algorithm. Adds the growth rate to each stat for each level, then rounds the resulting floats to an int
- 			int roundedStat;
+ 			int roundedStat = 0;
  			int levels = level - this.level;
  			
- 			for(int i = this.level; i < level; i++) {
+ 			for(int i = 0; i < this.curStats.size(); i++) {
  				roundedStat = Math.round(curStats.get(i) + (curGrowths.get(i) * levels));
  				leveledStats.add(i, roundedStat);
  			}
@@ -220,12 +219,17 @@ public class Character {
  	
  	/**
  	 * Returns character's info and stats in an easily readable format
+ 	 * 
+ 	 * First row is Name, level, class
+ 	 * Second row is headers for stats
+ 	 * Third row is current stats
+ 	 * Fourth row is current growths
  	 */
  	public String toString() {
  		String output = "";
  		
  		// Add headers
- 		output = name + " Level " + level + " " + currentClass.getName() + "\n";
+ 		output = name + ", Level " + level + " " + currentClass.getName() + "\n";
  		output = output + "HP\tStr\tMag\tDex\tSpd\tLuk\tDef\tRes\tCha\n";
  		
  		for(int i = 0; i < curStats.size(); i++) {
