@@ -36,13 +36,13 @@ public class CharacterTester {
 		}
 		badList1.add(5); // Size is 1 to check returning null
 		
-		List<Integer> sumList1 = Character.addIntLists(list1, list2);
-		List<Integer> sumList2 = Character.addIntLists(list1, badList1);
+		List<Integer> sumList1 = ListAdder.addIntLists(list1, list2);
+		List<Integer> sumList2 = ListAdder.addIntLists(list1, badList1);
 		
 		System.out.println("The sum of list1 and list2 should be all tens: " + sumList1);
 		System.out.println("The sum of list1 and badList1 should be null: " + sumList2);
 		
-		List<Integer> diffList1 = Character.subIntLists(list1, list2);
+		List<Integer> diffList1 = ListAdder.subIntLists(list1, list2);
 		System.out.println("The difference of the lists should be all zeros: " + diffList1);
 		
 		for(int i = 0; i < 10; i++) {
@@ -51,13 +51,13 @@ public class CharacterTester {
 		}
 		badList2.add(5.0f);
 		
-		List<Float> sumList3 = Character.addFloatLists(list3, list4);
-		List<Float> sumList4 = Character.addFloatLists(list3, badList2);
+		List<Float> sumList3 = ListAdder.addFloatLists(list3, list4);
+		List<Float> sumList4 = ListAdder.addFloatLists(list3, badList2);
 		
 		System.out.println("The sum of list3 and list4 should be all 10.0f: " + sumList3);
 		System.out.println("The sum of list3 and badList2 should be null: " + sumList4);
 		
-		List<Float> diffList2 = Character.subFloatLists(list3, list4);
+		List<Float> diffList2 = ListAdder.subFloatLists(list3, list4);
 		System.out.println("The difference of the lists should be all zeros: " + diffList2);
 	}
 	
