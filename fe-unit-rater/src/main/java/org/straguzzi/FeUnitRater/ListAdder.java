@@ -8,6 +8,8 @@ import java.util.List;
  * 
  * All methods return ArrayLists
  * 
+ * Could potentially make this an adaptor class for a library that does the same in the future.
+ * 
  * @author Scott Straguzzi
  */
 public class ListAdder {

@@ -136,13 +136,26 @@ public class Character {
  		return leveledStats;
  	}
  	
+ 	/**
+ 	 * Changes the caracter's class to the new class
+ 	 * 
+ 	 * Also changes the character's current stats and growths to reflect their new class
+ 	 * 
+ 	 * @param newClass
+ 	 */
  	public void changeClass(CharClass newClass) {
  		// Removes old class
+ 		curStats = ListAdder.subIntLists(curStats, currentClass.getClassBases());
+ 		curGrowths = ListAdder.subFloatLists(curGrowths, currentClass.getClassGrowths());
  		
  		// Adds new class
+ 		curStats = ListAdder.addIntLists(curStats, newClass.getClassBases());
+ 		curGrowths = ListAdder.addFloatLists(curGrowths, newClass.getClassGrowths());
+ 		
+ 		currentClass = newClass;
  	}
  	
-
+ 	
  	
  	/**
  	 * Returns character's info and stats in an easily readable format
