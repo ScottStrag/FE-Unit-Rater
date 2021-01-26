@@ -16,9 +16,14 @@ import java.util.*;
  *
  */
 public class CharacterTester {
-
-	public CharacterTester() {
-		// TODO Auto-generated constructor stub
+	public static void main(String[] args) {
+//		System.out.println("Testing the list adding methods...");
+//		testSumAndDiff();
+//		
+//		System.out.println("\n");
+		
+		System.out.println("Testing the character creation and projection adding methods...");
+		testCharProject();
 	}
 	
 	private static void testSumAndDiff() {
@@ -78,13 +83,5 @@ public class CharacterTester {
 		
 	}
 
-	public static void main(String[] args) {
-		System.out.println("Testing the list adding methods...");
-		testSumAndDiff();
-		
-		System.out.println("\n");
-		
-		System.out.println("Testing the character creation and projection adding methods...");
-		testCharProject();
-	}
+	
 }
