@@ -26,6 +26,9 @@ public class Character {
 	
 	private List<Float> curGrowths; // charGrowths + classGrowths
 	
+	private ClassPath classPath; // A collection of classes and levels for a character
+
+	
 	// TODO, some sort of way of tracking previous levels?
 	
 	/**
