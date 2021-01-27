@@ -73,13 +73,31 @@ public class CharacterTester {
 	private static void testCharProject() {
 		CharClass testClass = new CharClass("Commoner", 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-		Character test = new Character("Byleth", testClass, 1,
+
+		Character byleth = new Character("Byleth", testClass, 1,
 										27, 13, 6, 9, 8, 8, 6, 6, 7,
 										.45f, .45f, .35f, .45f, .45f, .45f, .35f, .30f, .45f);
 		
-		System.out.println(test); // Should print out info about Byleth at level 1 (See link above for source on info)
+		ClassPath myrm = new ClassPath(new CharClass("Myrmadon",
+													 0, 0, 0, 0, 1, 0, 0, 0, 0,
+													 0.1f, 0.0f, 0.0f, 0.0f, 0.05f, 0.0f, 0.0f, -.05f, 0.05f),
+										5);
+		ClassPath merc = new ClassPath(new CharClass("Mercenary",
+				 									 1, 1, 0, 0, 1, 0, 0, 0, 0,
+				 									 0.2f, .05f, 0.0f, 0.0f, 0.05f, 0.0f, 0.0f, -0.05f, 0.05f),
+										10);
+		ClassPath SM = new ClassPath(new CharClass("Swordmaster",
+				 									1, 2, 0, 1, 4, 0, 1, 0, 0,
+				 									0.25f, 0.10f, 0.0f, 0.0f, 0.20f, 0.0f, 0.0f, -5.0f, 5.0f),
+				 						20);
 		
-		System.out.println("On average, after 5 levels in the Commoner class, Byleth's stats look like this:\n" + test.project(5));
+		byleth.addClassChange(myrm);
+		byleth.addClassChange(merc);
+		byleth.addClassChange(SM);
+		
+		System.out.println(byleth); // Should print out info about Byleth at level 1 (See link above for source on info)
+		
+		System.out.println("On average, after 25 levels in the swordsman classline, Byleth's stats look like this:\n" + byleth.project(25));
 		
 	}
 

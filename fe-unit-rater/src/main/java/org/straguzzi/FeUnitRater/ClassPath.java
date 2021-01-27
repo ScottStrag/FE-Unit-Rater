@@ -17,7 +17,7 @@ public class ClassPath {
 	 */
 	public ClassPath() {
 		charClass = new CharClass("Commoner", 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f); // Defaults to becomming a commoner at level 1
+				0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 		level = 1;
 	}
 	

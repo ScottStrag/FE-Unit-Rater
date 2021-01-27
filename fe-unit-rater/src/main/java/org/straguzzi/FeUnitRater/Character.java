@@ -26,7 +26,7 @@ public class Character {
 	
 	private List<Float> curGrowths; // charGrowths + classGrowths
 	
-	private ClassPath classPath; // A collection of classes and levels for a character
+	private List<ClassPath> classPath; // A collection of classes and levels for a character
 
 	
 	// TODO, some sort of way of tracking previous levels?
@@ -41,7 +41,7 @@ public class Character {
 		avgStats = new ArrayList<Float>();
 		charGrowths = new ArrayList<Float>();
 		curGrowths = new ArrayList<Float>();
-		
+		classPath = new ArrayList<ClassPath>();
 	}
  	
  	/**
@@ -107,16 +107,21 @@ public class Character {
  		
  		curGrowths = ListAdder.addFloatLists(charGrowths, currentClass.getClassGrowths());
  		
- 		
+ 		classPath = new ArrayList<ClassPath>(6); // Assuming most characters can use 1 basic class, 2 beginner classes, 2 intermediate, 1 advanced, 1 master at most
+ 		classPath.add(new ClassPath(currentClass, level)); // Adds the character's base class to their ClassPath
  	}
  	
  	/**
  	 * Projects a character's stats at a given level. The calculation works similarly to PoR's fixed growth mode.
  	 * Stats are rounded to the nearest whole number.
+ 	 * 
+ 	 * Old, deprecated method. Replaced with a new project(int) which uses the ClassPath collection to account for character's class changes.
+ 	 * Kept mostly for my personal reference to help me make the new project method.
+ 	 * 
  	 * @param level to take the character to. Will not work if you try to level down
  	 * @return a List of the character's projected stats at a given level.
  	 */
- 	public List<Integer> project(int level) {
+ 	public List<Integer> project_OLD(int level) {
  		List<Integer> leveledStats = new ArrayList<Integer>();
  		
  		// Will not project backwards
@@ -135,6 +140,52 @@ public class Character {
  				leveledStats.add(i, roundedStat);
  			}
  		}
+ 		
+ 		return leveledStats;
+ 	}
+ 	
+ 	public List<Integer> project(int level) {
+ 		List<Integer> leveledStats = new ArrayList<Integer>();
+ 		
+ 		// Will not project backwards
+ 		if(this.level > level) {
+ 			return null;
+ 		}
+ 		else if(this.level == level) {
+ 			return curStats; // Projecting to the same level are the same stats...
+ 		}
+ 		else { // Main algorithm
+ 			// Makes a list of the unit's stats as a float
+ 			List<Float> floatStats = new ArrayList<Float>();
+ 			for(int i = 0; i < curStats.size(); i++) {
+ 				floatStats.add((float) curStats.get(i));
+ 			}
+ 			
+ 			
+ 			Iterator<ClassPath> it = classPath.iterator();
+ 			ClassPath nextClass = it.next(); // Assumes there is at least one class in a character's class path, enforced by giving commoner by default
+
+ 			for(int i = this.level; i < level; i++) {
+ 				if((nextClass.getLevel() == i) && it.hasNext()) { // Changes the character's class as designated by their class path
+ 					changeClass(nextClass.getCharClass());
+ 					nextClass = it.next();
+ 				}
+ 				
+ 				// Changes the leveledStats according to the character's growth rates
+ 				floatStats = ListAdder.addFloatLists(floatStats, curGrowths);
+ 			}
+ 			
+ 			// Consider doing some sort of rounding, >.5 rounds up and <.5 rounds down
+ 			// Perhaps in a future version?
+ 			for(int i = 0; i < floatStats.size(); i++) {
+ 	 			leveledStats.add(Math.round(floatStats.get(i)));
+ 	 		}
+ 			
+ 		// Adds class stat bonuses to the shown stats projection
+ 			leveledStats = ListAdder.addIntLists(leveledStats, nextClass.getCharClass().getClassBases());
+ 		}
+ 		
+ 		
  		
  		return leveledStats;
  	}
@@ -158,7 +209,17 @@ public class Character {
  		currentClass = newClass;
  	}
  	
+ 	/**
+ 	 * Adds a premade ClassPath object to the Character
+ 	 * @param newClass is a ClassPath object
+ 	 */
+ 	public void addClassChange(ClassPath newClass) {
+ 		classPath.add(newClass);
+ 	}
  	
+ 	public void addClassChange(CharClass charClass, int level) {
+ 		classPath.add(new ClassPath(charClass, level));
+ 	}
  	
  	/**
  	 * Returns character's info and stats in an easily readable format
