@@ -24,6 +24,8 @@ public class CharacterTester {
 		
 		System.out.println("Testing the character creation and projection adding methods...");
 		testCharProject();
+		System.out.println("\n");
+		ingridTest();
 	}
 	
 	private static void testSumAndDiff() {
@@ -99,6 +101,45 @@ public class CharacterTester {
 		
 		System.out.println("On average, after 25 levels in the swordsman classline, Byleth's stats look like this:\n" + byleth.project(25));
 		
+	}
+	/**
+	 * Tests ingrid from a level 1 commoner to a level 40 falcon knight
+	 * 
+	 * 4 levels in noble
+	 * 5 levels in soldier
+	 * 10 levels in peg knight
+	 * 10 levels in paladin
+	 * 10 levels in falcon knight
+	 */
+	private static void ingridTest() {
+		CharClass testClass = new CharClass("Noble", 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.05f);
+		
+		Character ingrid = new Character("Ingrid", testClass, 1,
+										27, 8, 6, 6, 8, 6, 5, 8, 8,
+										0.4f, 0.35f, 0.35f, 0.4f, 0.6f, 0.45f, 0.3f, 0.4f, 0.45f);
+		
+		ClassPath soldier = new ClassPath(new CharClass("Soldier", 0, 0, 0, 1, 0, 0, 0, 0, 0,
+														 0.1f, 0.0f, 0.0f, 0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f),
+										  5);
+		ClassPath peg = new ClassPath(new CharClass("Pegasus Knight", 0, 0, 0, 2, 3, 0, 0, 2, 0,
+													 0.15f, 0.0f, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.05f, 0.1f),
+									  10);
+		ClassPath paladin = new ClassPath(new CharClass("Paladin", 2, 2, 0, 2, -1, 0, 2, 2, 0,
+														0.3f, 0.1f, 0.0f, 0.05f, -0.1f, 0.05f, 0.05f, 0.05f, 0.05f),
+										  20);
+		ClassPath falcon = new ClassPath(new CharClass("Falcon Knight", 0, 1, 0, 4, 5, 0, 0, 4, 0,
+														0.3f, 0.1f, 0.0f, 0.0f, 0.2f, 0.0f, 0.0f, 0.05f, 0.1f),
+										 30);
+		
+		ingrid.addClassChange(soldier);
+		ingrid.addClassChange(peg);
+		ingrid.addClassChange(paladin);
+		ingrid.addClassChange(falcon);
+		
+		System.out.println(ingrid); // Should print out info about Byleth at level 1 (See link above for source on info)
+		
+		System.out.println("On average, a level 40 Ingrid who went through 5 levels of Soldier, 10 levels of Pegasis Knight, 10 levels of Paladin, and 10 levels of Falcon knight will have these stats:\n" + ingrid.project(40));
 	}
 
 	
