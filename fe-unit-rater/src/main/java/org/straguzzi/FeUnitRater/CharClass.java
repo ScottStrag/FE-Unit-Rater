@@ -36,6 +36,7 @@ public class CharClass {
 	 * TODO: Constructor for any class. Overall a similar constructor to the one in Character
 	 * 
 	 * @param name
+	 * @param hp
 	 * @param str
 	 * @param mag
 	 * @param skl
@@ -43,6 +44,8 @@ public class CharClass {
 	 * @param luk
 	 * @param def
 	 * @param res
+	 * @param cha
+	 * @param hpGrowth
 	 * @param strGrowth
 	 * @param magGrowth
 	 * @param sklGrowth
@@ -50,6 +53,7 @@ public class CharClass {
 	 * @param lukGrowth
 	 * @param defGrowth
 	 * @param resGrowth
+	 * @param chaGrowth
 	 */
 	public CharClass(String name, int hp, int str, int mag, int skl, int spd, int luk, int def, int res, int cha,
 			float hpGrowth, float strGrowth, float magGrowth, float sklGrowth, float spdGrowth, float lukGrowth, float defGrowth, float resGrowth, float chaGrowth) {
