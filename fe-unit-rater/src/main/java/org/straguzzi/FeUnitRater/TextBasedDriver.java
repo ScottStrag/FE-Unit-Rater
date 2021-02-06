@@ -20,7 +20,10 @@ public class TextBasedDriver {
 	}
 
 	public static void main(String[] args) {
-		
+		// Initialization methods
+		System.out.println("Initializing...\n");
+		buildCharacters();
+		buildClasses();
 
 	}
 	
@@ -114,8 +117,48 @@ public class TextBasedDriver {
 	
 	/**
 	 * Static method for populating the classes list object with all of the classes in 3H
+	 * Maps the class name in lowercase to the CharClass object of the same name
 	 */
 	private static void buildClasses() {
+		// Unique classes
+		classes.put("commoner", new CharClass("Commoner", 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+					0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+		classes.put("noble", new CharClass("Noble", 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+				   	0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.05f));
+		classes.put("dancer", new CharClass("Dancer", 0, 1, 0, 3, 3, 0, 2, 1, 2, 
+					0.2f, -0.05f, 0.0f, 0.0f, 0.0f, 0.0f, -0.05f, -0.05f, 0.1f));		
+		classes.put("enlightened one", new CharClass("Enlightened One", 1, 2, 3, 1, 1, 1, 2, 2, 1, 
+					0.2f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.05f, 0.0f, 0.05f));
+		classes.put("armored lord", new CharClass("Armored Lord", 5, 0, 0, 0, -3, 0, 5, 0, 2, 
+				0.2f, 0.05f, 0.05f, 0.0f, 0.0f, 0.0f, 0.05f, 0.05f, 0.1f));
+		classes.put("high lord", new CharClass("High Lord", 3, 1, 0, 0, 3, 0, 1, 0, 2, 
+				0.2f, 0.05f, 0.0f, 0.05f, 0.0f, 0.0f, 0.05f, 0.0f, 0.10f));
+		classes.put("wyvern master", new CharClass("Wyvern Master", 2, 2, 0, 3, 1, 0, 1, 0, 2, 
+				0.2f, 0.1f, 0.0f, 0.0f, 0.05f, 0.0f, 0.05f, 0.0f, 0.1f));
+		classes.put("emperor", new CharClass("Emperor", 8, 0, 0, 0, -4, 1, 8, 0, 2, 
+				0.3f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.05f, 0.05f, 0.1f));
+		classes.put("great lord", new CharClass("Great Lord", 5, 2, 0, 0, 4, 1, 1, 0, 2, 
+				0.3f, 0.1f, 0.0f, 0.1f, 0.0f, 0.0f, 0.05f, 0.0f, 0.1f));
+		classes.put("barbarossa", new CharClass("Barbarossa", 3, 3, 0, 5, 2, 0, 2, 0, 2, 
+				0.3f, 0.15f, 0.0f, 0.0f, 0.1f, 0.0f, 0.05f, 0.0f, 0.1f));
 		
+		// Beginner
+		classes.put("myrmidon", new CharClass("Myrmidon", 0, 0, 0, 0, 1, 0, 0, 0, 0, 
+				0.1f, 0.0f, 0.0f, 0.0f, 0.05f, 0.0f, 0.0f, -0.05f, 0.05f));
+		classes.put("soldier", new CharClass("Soldier", 0, 0, 0, 1, 0, 0, 0, 0, 0, 
+				0.1f, 0.0f, 0.0f, 0.05f, 0.0f, 0.0f, 0.0f, -0.05f, 0.05f));
+		classes.put("fighter", new CharClass("Fighter", 0, 1, 0, 0, 0, 0, 0, 0, 0, 
+				0.1f, 0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -0.05f, 0.05f));
+		classes.put("monk", new CharClass("Monk", 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+				0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.05f, 0.05f));
+		
+		// Intermediate
+		
+		
+		// Advanced
+		
+		// Master
+		
+		// DLC
 	}
 }
