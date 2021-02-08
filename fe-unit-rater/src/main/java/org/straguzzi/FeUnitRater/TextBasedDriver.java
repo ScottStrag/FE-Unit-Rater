@@ -24,6 +24,8 @@ public class TextBasedDriver {
 		System.out.println("Initializing...\n");
 		buildCharacters();
 		buildClasses();
+		
+		System.out.println("Successfully loaded all students + playable classes!");
 
 	}
 	
@@ -39,6 +41,8 @@ public class TextBasedDriver {
 										   0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f); // Instantiates one of the 2 default classes for the students
 		CharClass noble = new CharClass("Commoner", 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 				   						0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.05f); // Instantiates one of the 2 default classes for the students
+		
+		characters = new HashMap<String, Character>();
 		
 		// Adds Byleth
 		characters.put("byleth", new Character("Byleth", commoner, 1, 27, 13, 6, 9, 8, 8, 6, 6, 7,
@@ -120,6 +124,8 @@ public class TextBasedDriver {
 	 * Maps the class name in lowercase to the CharClass object of the same name
 	 */
 	private static void buildClasses() {
+		classes = new HashMap<String, CharClass>();
+		
 		// Unique classes
 		classes.put("commoner", new CharClass("Commoner", 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 					0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
