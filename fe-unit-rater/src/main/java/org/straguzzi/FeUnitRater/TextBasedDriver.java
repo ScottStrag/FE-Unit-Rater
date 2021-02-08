@@ -153,12 +153,86 @@ public class TextBasedDriver {
 				0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.05f, 0.05f));
 		
 		// Intermediate
+		classes.put("lord", new CharClass("Lord", 1, 0, 0, 0, 1, 1, 0, 0, 2, 
+				0.2f, 0.0f, 0.0f, 0.1f, 0.00f, 0.0f, 0.0f, 0.0f, 0.1f));
+		classes.put("mercenary", new CharClass("Mercenary", 1, 1, 0, 0, 1, 0, 0, 0, 0, 
+				0.2f, 0.05f, 0.0f, 0.0f, 0.05f, 0.0f, 0.0f, -0.05f, 0.05f));
+		classes.put("theif", new CharClass("Theif", 0, 0, 0, 2, 2, 0, 0, 0, 0, 
+				0.2f, 0.0f, 0.0f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.05f));
+		classes.put("armored knight", new CharClass("Armored Knight", 3, 0, 0, 0, -2, 0, 4, -1, 0, 
+				0.2f, 0.0f, 0.0f, 0.0f, -0.1f, 0.0f, 0.1f, -0.05f, 0.05f));
+		classes.put("cavalier", new CharClass("Cavalier", 1, 1, 0, 2, -1, 0, 1, 0, 0, 
+				0.2f, 0.05f, 0.0f, 0.05f, -0.1f, 0.0f, 0.05f, 0.0f, 0.05f));
+		classes.put("brigand", new CharClass("Brigand", 2, 2, 0, 0, 0, 0, 0, 0, 0, 
+				0.3f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -0.05f, 0.05f));
+		classes.put("archer", new CharClass("Archer", 0, 0, 0, 2, 0, 2, 0, 0, 0, 
+				0.05f, 0.0f, 0.0f, 0.1f, 0.0f, 0.05f, 0.0f, 0.0f, 0.05f));
+		classes.put("brawler", new CharClass("Brawler", 1, 0, 0, 2, 2, 0, 0, -1, 0, 
+				0.3f, 0.0f, -0.1f, 0.1f, 0.1f, 0.0f, 0.0f, -0.1f, 0.05f));
+		classes.put("mage", new CharClass("Mage", 0, 0, 1, 1, 0, 0, 0, 2, 0, 
+				0.05f, -0.05f, 0.1f, 0.05f, 0.0f, 0.0f, -0.05f, 0.05f, 0.05f));
+		classes.put("dark mage", new CharClass("Dark Mage", 0, 0, 2, 1, 0, 0, 0, 1, 0, 
+				0.05f, -0.05f, 0.1f, 0.05f, 0.1f, 0.0f, -0.05f, 0.05f, 0.0f));
+		classes.put("priest", new CharClass("Priest", 0, 0, 0, 1, 0, 0, 0, 3, 0, 
+				0.05f, -0.05f, 0.05f, 0.05f, 0.0f, 0.0f, -0.05f, 0.1f, 0.1f));
+		classes.put("pegasus knight", new CharClass("Pegasus Knight", 0, 0, 0, 2, 3, 0, 0, 2, 0, 
+				0.15f, 0.0f, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.05f, 0.1f));
 		
 		
 		// Advanced
+		classes.put("hero", new CharClass("Hero", 3, 2, 0, 0, 2, 1, 1, 0, 0, 
+				0.3f, 0.1f, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, -0.05f, 0.05f));
+		classes.put("swordmaster", new CharClass("Swordmaster", 1, 2, 0, 1, 4, 0, 1, 0, 0, 
+				0.25f, 0.1f, 0.0f, 0.0f, 0.2f, 0.0f, 0.0f, -0.05f, 0.05f));
+		classes.put("assassin", new CharClass("Assassin", 0, 0, 0, 3, 5, 1, 0, 0, 0, 
+				0.2f, 0.0f, 0.0f, 0.2f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f));
+		classes.put("fortress knight", new CharClass("Fortress Knight", 5, 0, 0, 0, -6, 0, 10	, 0, 0, 
+				0.3f, 0.1f, 0.0f, 0.0f, -0.1f, 0.0f, 0.15f, 0.0f, 0.05f));
+		classes.put("paladin", new CharClass("Paladin", 2, 2, 0, 2, -1, 0, 2, 2, 0, 
+				0.3f, 0.1f, 0.0f, 0.05f, -0.1f, 0.05f, 0.05f, 0.05f, 0.05f));
+		classes.put("wyvern rider", new CharClass("Wyvern Rider", 1, 3, 0, 1, 3, 0, 2, 0, 0, 
+				0.3f, 0.1f, -0.05f, 0.0f, 0.0f, 0.0f, 0.05f, -0.05f, 0.05f));
+		classes.put("warrior", new CharClass("Warrior", 3, 3, 0, 0, 1, 1, 1, 0, 0, 
+				0.4f, 0.15f, -0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.05f));
+		classes.put("sniper", new CharClass("Sniper", 0, 1, 0, 5, 0, 3, 0, 0, 0, 
+				0.1f, 0.05f, 0.0f, 0.2f, 0.0f, 0.1f, 0.0f, 0.0f, 0.05f));
+		classes.put("grappler", new CharClass("Grappler", 2, 1, 0, 3, 3, 0, 1, -1, 0, 
+				0.4f, 0.1f, 0.0f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.05f));
+		classes.put("warlock", new CharClass("Warlock", 0, 0, 3, 1, 1, 0, 0, 4, 0, 
+				0.1f, 0.0f, 0.1f, 0.0f, 0.1f, 0.0f, -0.05f, 0.05f, 0.05f));
+		classes.put("dark bishop", new CharClass("dark bishop", 0, 0, 4, 2, 0, 0, 0, 3, 0, 
+				0.1f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, -0.05f, 0.05f, 0.0f));
+		classes.put("bishop", new CharClass("Bishop", 1, 0, 2, 1, 0, 0, 0, 5, 0, 
+				0.1f, 0.0f, 0.1f, 0.0f, 0.0f, 0.1f, -0.05f, 0.05f, 0.1f));
 		
 		// Master
+		classes.put("falcon knight", new CharClass("Falcon Knight", 0, 1, 0, 4, 5, 0, 0, 4, 0, 
+				0.3f, 0.1f, 0.0f, 0.0f, 0.2f, 0.0f, 0.0f, 0.05f, 0.1f));
+		classes.put("wyvern lord", new CharClass("Wyvern Lord", 2, 4, 0, 1, 4, 0, 3, 0, 0, 
+				0.3f, 0.15f, -0.05f, 0.0f, 0.1f, 0.0f, 0.05f, 0.0f, 0.05f));
+		classes.put("mortal savant", new CharClass("Mortal Savant", 1, 1, 2, 1, 1, 0, 2, 2, 0, 
+				0.2f, 0.1f, 0.1f, 0.0f, -0.1f, 0.1f, 0.0f, 0.00f, 0.05f));
+		classes.put("great knight", new CharClass("Great Knight", 5, 1, 0, 0, -4, 0, 8, 0, 0, 
+				0.3f, 0.1f, 0.0f, 0.0f, -0.1f, 0.0f, 0.05f, -0.05f, 0.05f));
+		classes.put("bow knight", new CharClass("Bow Knight", 2, 1, 0, 3, 1, 1, 1, 0, 0, 
+				0.1f, 0.0f, 0.0f, 0.0f, -0.05f, 0.0f, 0.0f, 0.0f, 0.05f));
+		classes.put("dark knight", new CharClass("Dark Knight", 1, 1, 2, 2, -1, 0, 2, 3, 0, 
+				0.1f, 0.05f, 0.1f, 0.0f, -0.05f, 0.0f, 0.05f, 0.1f, 0.05f));
+		classes.put("holy knight", new CharClass("Holy Knight", 2, 1, 1, 2, -1, 0, 1, 4, 0, 
+				0.1f, 0.0f, 0.1f, 0.0f, -0.05f, 0.1f, 0.05f, 0.1f, 0.1f));
+		classes.put("war master", new CharClass("War Master", 3, 5, 0, 0, 2, 1, 1, 0, 0, 
+				0.4f, 0.15f, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 0.05f));
+		classes.put("gremory", new CharClass("Gremory", 0, 0, 5, 2, 1, 0, 0, 4, 2, 
+				0.1f, 0.0f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.05f, 0.1f));
 		
 		// DLC
+		classes.put("trickster", new CharClass("Trickster", 0, 0, 0, 3, 4, 3, 0, 1, 0, 
+				0.2f, 0.0f, 0.0f, 0.15f, 0.2f, 0.1f, 0.0f, 0.05f, 0.0f));
+		classes.put("war monk", new CharClass("War Monk / Cleric", 3, 2, 0, 1, 0, 0, 1, 1, 0, 
+				0.4f, 0.1f, 0.05f, 0.1f, 0.0f, 0.0f, 0.0f, 0.05f, 0.05f));
+		classes.put("dark flier", new CharClass("Dark Flier", 0, 0, 0, 3, 4, 0, 0, 3, 0, 
+				0.2f, 0.0f, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.1f, 0.1f));
+		classes.put("valkyrie", new CharClass("Valkyrie", 1, 0, 4, 0, -2, 0, 0, 2, 2, 
+				0.05f, 0.0f, 0.05f, 0.0f, -0.05f, 0.05f, 0.05f, 0.1f, 0.1f));
 	}
 }
