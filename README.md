@@ -4,10 +4,10 @@ They can set the character's class and the levels they become said class, and th
 
 Instructions for use are included in the prompts in the UI.
 
-All unit info was taken from the following sources:
-https://serenesforest.net/three-houses/characters/base-stats/
-https://serenesforest.net/three-houses/characters/growth-rates/
-https://serenesforest.net/three-houses/classes/stat-boosts/
-https://serenesforest.net/three-houses/classes/growth-rates/
+All unit info was taken from the following sources:\n
+https://serenesforest.net/three-houses/characters/base-stats/\n
+https://serenesforest.net/three-houses/characters/growth-rates/\n
+https://serenesforest.net/three-houses/classes/stat-boosts/\n
+https://serenesforest.net/three-houses/classes/growth-rates/\n
 
 This is a fan made utility and is in no way associated with Nintendo or Intelligent Systems. Please enjoy!
