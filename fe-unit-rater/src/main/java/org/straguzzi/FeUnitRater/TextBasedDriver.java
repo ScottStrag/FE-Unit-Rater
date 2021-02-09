@@ -35,7 +35,7 @@ public class TextBasedDriver {
 		while(running) {
 			// Prints the first layer of the menu
 			// Workflow goes like this: select character, create classpath, project to some level, display the projected stats, loop back here
-			System.out.println("PLease select a character, or type in \"close\" to close."); // Should print as a lowercase
+			System.out.println("Please select a character, or type in \"close\" to close."); // Should print as a lowercase
 			boolean valid = false;
 			Character character = null;
 			while(!valid) { // Makes sure only valid input will be read
@@ -58,11 +58,11 @@ public class TextBasedDriver {
 					System.out.println("Please input " + character.getName() + "'s class path. Type \"done\" for the class to move on to the next step.\n"
 							+ "Please input their classes in the order they were in.");
 					valid = false;
+					int level = 0;
 					while(!valid) {
 						System.out.println("What class will " + character.getName() + " become?");
 						CharClass charClass = null;
-						int level = 0;
-						
+
 						input = formatInput(scan.nextLine());
 						
 						if(input.equalsIgnoreCase("done")) {
@@ -71,13 +71,27 @@ public class TextBasedDriver {
 						else {
 							charClass = classes.get(input);
 							if(charClass != null) {
-								System.out.println("What level does " + character.getName() + " become this class?");
-								int next = scan.nextInt(); // Just uses scan.nextInt() for now, will likely change in the future for better error handling
+								boolean isNum = false;
+								int next = 0;
+								while(!isNum) { // Makes sure int input is of type int
+									System.out.println("What level does " + character.getName() + " become this class?");
+									input = formatInput(scan.nextLine());
+									try {
+										next = Integer.parseInt(input);
+										isNum = true;
+									}
+									catch (Exception e) {
+										System.out.println("Please enter a number!");
+									}
+								}
+								
 								if(next > level) {
 									level = next;
 									character.addClassChange(new ClassPath(charClass, level)); // Adds their class change
 									System.out.println(character.getName() + " becomes a " + charClass.getName() + " at level " + level + ".");
-									scan.nextLine();
+								}
+								else {
+									System.out.println("Please make sure the level is higher than the previous class's");
 								}
 							}
 							else { // Invalid input, class name likely misspelled
@@ -86,11 +100,27 @@ public class TextBasedDriver {
 						}
 					}
 					// Finished getting classes + levels, now finds what level the character's stats will be projected to
-					System.out.println("What level would you like to project " + character.getName() + "'s stats to?");
-					int level = scan.nextInt();
+					boolean isNum = false;
+					while(!isNum) { // Makes sure int input is of type int
+						System.out.println("What level would you like to project " + character.getName() + "'s stats to?");
+						input = formatInput(scan.nextLine());
+						
+						try {
+							level = Integer.parseInt(input);
+							isNum = true;
+						}
+						catch (Exception e) {
+							System.out.println("Please enter a number!");
+						}
+					}	
 					// Prints their stats at that level
-					System.out.println(character.project(level));
-					scan.nextLine(); // Clears the input buffer
+					List<Integer> projectedStats = character.project(level);
+					
+					System.out.println(character.getName() + "'s stats at level " + level + " should be on average:\nHP\tStr\tMag\tDex\tSpe\tLuk\tDef\tRes\tCha");
+					for(Integer stat : projectedStats) {
+						System.out.print(stat + "\t");
+					}
+					System.out.println("\n");
 				}
 			}
 			
