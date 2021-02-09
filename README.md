@@ -1,5 +1,5 @@
 # fe-unit-rater
-This is a tool for players of the game Fire Emblem Three Houses to test their unit's stats.
+This is a tool for players of the game Fire Emblem: Three Houses to test their unit's stats.
 They can set the character's class and the levels they become said class, and then project what that character's stats will be at some level.
 
 Instructions for use are included in the prompts in the UI.
