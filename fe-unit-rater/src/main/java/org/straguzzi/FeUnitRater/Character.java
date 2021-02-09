@@ -165,7 +165,7 @@ public class Character {
  			Iterator<ClassPath> it = classPath.iterator();
  			ClassPath nextClass = it.next(); // Assumes there is at least one class in a character's class path, enforced by giving commoner by default
 
- 			for(int i = this.level; i < level; i++) {
+ 			for(int i = this.level; i <= level; i++) {
  				if((nextClass.getLevel() == i) && it.hasNext()) { // Changes the character's class as designated by their class path
  					changeClass(nextClass.getCharClass());
  					nextClass = it.next();
@@ -221,6 +221,9 @@ public class Character {
  		classPath.add(new ClassPath(charClass, level));
  	}
  	
+ 	public String getName() {
+ 		return name;
+ 	}
  	/**
  	 * Returns character's info and stats in an easily readable format
  	 * 

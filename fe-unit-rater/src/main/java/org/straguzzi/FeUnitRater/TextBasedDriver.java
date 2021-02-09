@@ -21,11 +21,83 @@ public class TextBasedDriver {
 
 	public static void main(String[] args) {
 		// Initialization methods
-		System.out.println("Initializing...\n");
+		System.out.println("Initializing...");
 		buildCharacters();
 		buildClasses();
 		
-		System.out.println("Successfully loaded all students + playable classes!");
+		System.out.println("Successfully loaded all students + playable classes!\n");
+		System.out.println("Please note that this calculator does not account for minimum class base boosts upon certification.\nSupport for those is coming in a later version!\n");
+		
+		// Gonna put a while loop here to take input and all
+		boolean running = true;
+		String input = "";
+		Scanner scan = new Scanner(System.in);
+		while(running) {
+			// Prints the first layer of the menu
+			// Workflow goes like this: select character, create classpath, project to some level, display the projected stats, loop back here
+			System.out.println("PLease select a character, or type in \"close\" to close."); // Should print as a lowercase
+			boolean valid = false;
+			Character character = null;
+			while(!valid) { // Makes sure only valid input will be read
+				input = formatInput(scan.nextLine()); // Takes input as a string
+				if(input.equalsIgnoreCase("close")) { // Closes the program gracefully
+					System.out.println("Thank you for using this calculator!");
+					valid = true;
+					running = false;
+				}
+				else {
+					character = characters.get(input);
+					if(character != null) {
+						valid = true; // The given character was successfully pulled from the hashmap and the user can move on to the next step
+					}
+					else {
+						System.out.println("Invalid input. Did you misspell the character's name?");
+					}
+				}
+				if(character != null) { // Character is selected, now gets classes + levels
+					System.out.println("Please input " + character.getName() + "'s class path. Type \"done\" for the class to move on to the next step.\n"
+							+ "Please input their classes in the order they were in.");
+					valid = false;
+					while(!valid) {
+						System.out.println("What class will " + character.getName() + " become?");
+						CharClass charClass = null;
+						int level = 0;
+						
+						input = formatInput(scan.nextLine());
+						
+						if(input.equalsIgnoreCase("done")) {
+							valid = true; // Moves on to the next step
+						}
+						else {
+							charClass = classes.get(input);
+							if(charClass != null) {
+								System.out.println("What level does " + character.getName() + " become this class?");
+								int next = scan.nextInt(); // Just uses scan.nextInt() for now, will likely change in the future for better error handling
+								if(next > level) {
+									level = next;
+									character.addClassChange(new ClassPath(charClass, level)); // Adds their class change
+									System.out.println(character.getName() + " becomes a " + charClass.getName() + " at level " + level + ".");
+									scan.nextLine();
+								}
+							}
+							else { // Invalid input, class name likely misspelled
+								System.out.println("Invalid input. Did you misspell the class name?");
+							}
+						}
+					}
+					// Finished getting classes + levels, now finds what level the character's stats will be projected to
+					System.out.println("What level would you like to project " + character.getName() + "'s stats to?");
+					int level = scan.nextInt();
+					// Prints their stats at that level
+					System.out.println(character.project(level));
+					scan.nextLine(); // Clears the input buffer
+				}
+			}
+			
+		}
+		scan.close();
+		
+		System.out.println("\nThank you for using the character stats projector!");
 
 	}
 	
@@ -240,5 +312,24 @@ public class TextBasedDriver {
 				0.2f, 0.0f, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.1f, 0.1f));
 		classes.put("valkyrie", new CharClass("Valkyrie", 1, 0, 4, 0, -2, 0, 0, 2, 2, 
 				0.05f, 0.0f, 0.05f, 0.0f, -0.05f, 0.05f, 0.05f, 0.1f, 0.1f));
+	}
+	
+	/**
+	 * Trims leading and trailing whitespace
+	 * Cannot trim middle whitespace because some classes have a space in their name
+	 * @return formatted string
+	 */
+	private static String formatInput(String input) {
+//		String output = "";
+//		
+//		input = input.toLowerCase();
+//		for(char c : input.toCharArray()) {
+//			if(c != ' ') {
+//				output = output + c;
+//			}
+//		}
+//		
+//		return output;
+		return input.toLowerCase();
 	}
 }
